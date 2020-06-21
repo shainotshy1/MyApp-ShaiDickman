@@ -16,12 +16,26 @@ namespace MyAppMainPage
             EraseCommand = new Command(() => { TheNote = string.Empty; });
             SaveCommand = new Command(() =>
             {
-                AllNotes.Add(TheNote);
+                AllNotes.Add(new Notes { Note=TheNote });
+                SavedNotes.Add(new Notes { Note = TheNote });
 
                 TheNote = string.Empty;
             });
+            EraseNoteCommand = new Command(() => { AllNotes.Clear(); });
+            UndoClearCommand = new Command(() => { AllNotes = SavedNotes; });
         }
-        public ObservableCollection<string> AllNotes { get; set; }
+        ObservableCollection<Notes> allNotes = new ObservableCollection<Notes>();
+        ObservableCollection<Notes> savedNotes = new ObservableCollection<Notes>();
+        public ObservableCollection<Notes> AllNotes
+        {
+            get { return allNotes; }
+            set { allNotes = value; }
+        }
+        public ObservableCollection<Notes> SavedNotes
+        {
+            get { return savedNotes; }
+            set { savedNotes = value; }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         string theNote;
@@ -41,6 +55,14 @@ namespace MyAppMainPage
 
         public Command SaveCommand { get; }
         public Command EraseCommand { get; }
+        public Command EraseNoteCommand { get; }
+
+        public Command UndoClearCommand { get; }
+
+        public class Notes
+        {
+            public string Note { get; set; }
+        }
         
        
 

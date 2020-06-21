@@ -21,7 +21,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
         <Image Source="Painting" BackgroundColor="PowderBlue"
                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
         <Editor Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
@@ -31,12 +30,16 @@
                 Margin="10,0" Command="{Binding SaveCommand}"/>
         <Button Grid.Row="2" Grid.Column="1" Text="Erase" BackgroundColor="Green" TextColor="White"
                 Margin="10,0" Command="{Binding EraseCommand}"/>
+        <Button Grid.Row="4" Grid.Column="0" Text="Clear" BackgroundColor="BlueViolet" TextColor="White"
+                Margin="10,10" Command="{Binding EraseNoteCommand}"/>
+        <Button Grid.Row="4" Grid.Column="1" Text="Undo Clear" BackgroundColor="CadetBlue" TextColor="White"
+                Margin="10,10" Command="{Binding UndoClearCommand}"/>
         <CollectionView ItemsSource="{Binding AllNotes}" Grid.Row="3" Grid.ColumnSpan="2">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Frame>
-                            <Label Text="{Binding .}" FontSize="Title"/>
+                            <Label Text="{Binding Note}" FontSize="Large"/>
                         </Frame>
                     </StackLayout>
                 </DataTemplate>
